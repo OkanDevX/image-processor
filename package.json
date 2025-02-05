@@ -1,0 +1,28 @@
+{
+  "name": "image-processor",
+  "version": "0.0.1-beta.1",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "pnpm build && node dist/index.js"
+  },
+  "author": "Okan",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/cli-spinner": "^0.2.3",
+    "@types/fs-extra": "^11.0.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "cli-spinner": "^0.2.10",
+    "commander": "^13.1.0",
+    "fs-extra": "^11.3.0",
+    "sharp": "^0.33.5"
+  },
+  "bin": {
+    "image-processor": "./dist/index.js"
+  },
+  "type": "commonjs"
+}
