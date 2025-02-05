@@ -2,6 +2,8 @@
 
 An advanced command-line tool for batch image processing. With this tool, you can resize your images, change their format, and apply various image processing effects.
 
+![image-processor](https://github.com/user-attachments/assets/3a4a2345-854b-4882-af1b-ea23d125b315)
+
 ## 🚀 Features
 
 - ✨ Batch image processing
