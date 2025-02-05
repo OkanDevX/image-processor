@@ -72,9 +72,8 @@ const options = program.opts();
 async function showMenu() {
   console.log(chalk.cyan("\n📋 What would you like to do?"));
   console.log(chalk.dim("────────────────────────"));
-  console.log("1. Process more images");
-  console.log("2. Show help");
-  console.log("3. Exit");
+  console.log("1. Show help");
+  console.log("2. Exit");
   console.log(chalk.dim("────────────────────────"));
 
   process.stdin.resume();
@@ -172,13 +171,9 @@ async function processImages(options: any) {
       switch (choice) {
         case "1":
           console.clear();
-          await processImages(options);
-          return;
-        case "2":
-          console.clear();
           program.help();
           return;
-        case "3":
+        case "2":
           process.exit(0);
         default:
           console.log(chalk.yellow("Invalid choice. Please try again."));
