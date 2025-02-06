@@ -89,22 +89,22 @@ image-processor -i ./photos -o ./processed ^
 
 ## 🎮 Command Options
 
-| Option                   | Description                        | Default    |
-| ------------------------ | ---------------------------------- | ---------- |
-| `-i, --input <dir>`      | Input directory                    | (Required) |
-| `-o, --output <dir>`     | Output directory                   | (Required) |
-| `-w, --width <number>`   | Width                              | -          |
-| `-h, --height <number>`  | Height                             | -          |
-| `-e, --extension <type>` | Output format (webp, jpg, png)     | webp       |
-| `-q, --quality <number>` | Quality (0-100)                    | 80         |
-| `-f, --fit <type>`       | Resize type (cover, contain, fill) | cover      |
-| `--skip-existing`        | Skip existing files                | false      |
-| `--no-parallel`          | Disable parallel processing        | false      |
-| `--normalize`            | Normalize image                    | false      |
-| `--grayscale`            | Convert to grayscale               | false      |
-| `--blur <sigma>`         | Apply blur (0.3-1000)              | -          |
-| `--sharpen`              | Apply sharpening                   | false      |
-| `--gamma <value>`        | Apply gamma value (1.0-3.0)        | -          |
+| Option                   | Description                          | Default    |
+| ------------------------ | ------------------------------------ | ---------- |
+| `-i, --input <dir>`      | Input directory                      | (Required) |
+| `-o, --output <dir>`     | Output directory                     | (Required) |
+| `-w, --width <number>`   | Width                                | -          |
+| `-h, --height <number>`  | Height                               | -          |
+| `-e, --extension <type>` | Output format (webp, jpg, png, jfif) | webp       |
+| `-q, --quality <number>` | Quality (0-100)                      | 80         |
+| `-f, --fit <type>`       | Resize type (cover, contain, fill)   | cover      |
+| `--skip-existing`        | Skip existing files                  | false      |
+| `--no-parallel`          | Disable parallel processing          | false      |
+| `--normalize`            | Normalize image                      | false      |
+| `--grayscale`            | Convert to grayscale                 | false      |
+| `--blur <sigma>`         | Apply blur (0.3-1000)                | -          |
+| `--sharpen`              | Apply sharpening                     | false      |
+| `--gamma <value>`        | Apply gamma value (1.0-3.0)          | -          |
 
 ## 📝 Examples
 
