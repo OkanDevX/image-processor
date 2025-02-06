@@ -26,7 +26,7 @@ program
   .requiredOption("-o, --output <dir>", chalk.cyan("Output directory"))
   .option(
     "-e, --extension <type>",
-    chalk.cyan("Output file extension (webp, jpg, png)"),
+    chalk.cyan("Output file extension (webp, jpg, png, jfif)"),
     "webp"
   )
   .option("-w, --width <number>", chalk.cyan("Width"), parseInt)
@@ -99,6 +99,17 @@ async function processImages(options: any) {
     }
     if (options.gamma && (options.gamma < 1.0 || options.gamma > 3.0)) {
       throw new Error("Gamma value must be between 1.0-3.0");
+    }
+
+    // Check supported formats
+    const supportedFormats = ["jpg", "jpeg", "png", "webp", "jfif"];
+
+    if (!supportedFormats.includes(options.extension.toLowerCase())) {
+      throw new Error(
+        `Unsupported file format: ${
+          options.extension
+        }. Supported formats: ${supportedFormats.join(", ")}`
+      );
     }
 
     spinner.start();

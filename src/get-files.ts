@@ -17,7 +17,7 @@ export async function getFiles(dir: string) {
     if (item.isDirectory()) {
       // If it's a directory, go inside and add files
       files = files.concat(await getFiles(fullPath));
-    } else if (/\.(jpe?g|png|webp)$/i.test(item.name)) {
+    } else if (/\.(jpe?g|png|webp|jfif)$/i.test(item.name)) {
       // Only add image files
       files.push(fullPath);
     }

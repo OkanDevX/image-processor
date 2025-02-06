@@ -8,7 +8,7 @@ An advanced command-line tool for batch image processing. With this tool, you ca
 
 - ✨ Batch image processing
 - 📐 Flexible resizing options
-- 🎨 Multiple output formats (WebP, JPEG, PNG)
+- 🎨 Multiple output formats (WebP, JPEG, PNG, jfif)
 - 🛠️ Advanced image processing options
 - ⚡ Parallel processing support
 
