@@ -32,6 +32,7 @@ program
   .option("-w, --width <number>", chalk.cyan("Width"), parseInt)
   .option("-h, --height <number>", chalk.cyan("Height"), parseInt)
   .option("-q, --quality <number>", chalk.cyan("Quality (0-100)"), parseInt)
+  .option("-s, --scale <number>", chalk.cyan("Scale factor (0.1-10.0)"), parseFloat)
   .option(
     "-f, --fit <type>",
     chalk.cyan("Resize type (cover, contain, fill)"),
@@ -56,6 +57,9 @@ ${chalk.yellow("Example Usage:")}
 
   ${chalk.green("With Resizing:")}
   $ image-processor -i ./photos -o ./processed -w 1920 -h 1080 -q 85
+
+  ${chalk.green("With Scaling:")}
+  $ image-processor -i ./photos -o ./processed -s 0.5 -q 85
 
   ${chalk.green("With All Features:")}
   $ image-processor -i ./photos -o ./processed \\
@@ -100,6 +104,9 @@ async function processImages(options: any) {
     if (options.gamma && (options.gamma < 1.0 || options.gamma > 3.0)) {
       throw new Error("Gamma value must be between 1.0-3.0");
     }
+    if (options.scale && (options.scale < 0.1 || options.scale > 10.0)) {
+      throw new Error("Scale factor must be between 0.1-10.0");
+    }
 
     // Check supported formats
     const supportedFormats = ["jpg", "jpeg", "png", "webp", "jfif"];
@@ -126,6 +133,12 @@ async function processImages(options: any) {
         chalk.white(`${options.width || "auto"}x${options.height || "auto"}`)
       );
     }
+    if (options.scale) {
+      console.log(
+        chalk.cyan("📏 Scale Factor:"),
+        chalk.white(`${options.scale}x`)
+      );
+    }
     console.log(
       chalk.cyan("🎨 Format:"),
       chalk.white(`${options.extension} (${options.quality}%)`)
@@ -142,6 +155,13 @@ async function processImages(options: any) {
           height: options.height,
           fit: options.fit,
         })
+      );
+    }
+
+    // Scale operation
+    if (options.scale && !options.width && !options.height) {
+      operations.push(
+        ImageProcessor.scale(options.scale)
       );
     }
 

@@ -8,6 +8,7 @@ An advanced command-line tool for batch image processing. With this tool, you ca
 
 - ✨ Batch image processing
 - 📐 Flexible resizing options
+- 📏 Smart scaling with aspect ratio preservation
 - 🎨 Multiple output formats (WebP, JPEG, PNG, jfif)
 - 🛠️ Advanced image processing options
 - ⚡ Parallel processing support
@@ -67,6 +68,12 @@ image-processor -i ./photos -o ./processed
 # With resizing
 image-processor -i ./photos -o ./processed -w 1920 -h 1080 -q 85
 
+# With scaling (50% smaller)
+image-processor -i ./photos -o ./processed -s 0.5
+
+# With scaling (preserves aspect ratio)
+image-processor -i ./photos -o ./processed -s 0.5 -q 85
+
 # With all features
 image-processor -i ./photos -o ./processed \
   -w 1920 -h 1080 \
@@ -84,7 +91,8 @@ Note: When using PowerShell or Command Prompt on Windows, use `^` instead of `\`
 image-processor -i ./photos -o ./processed ^
   -w 1920 -h 1080 ^
   -e webp ^
-  -q 85
+  -q 85 ^
+  -s 1.5
 ```
 
 ## 🎮 Command Options
@@ -95,6 +103,7 @@ image-processor -i ./photos -o ./processed ^
 | `-o, --output <dir>`     | Output directory                     | (Required) |
 | `-w, --width <number>`   | Width                                | -          |
 | `-h, --height <number>`  | Height                               | -          |
+| `-s, --scale <number>`   | Scale factor (0.1-10.0)              | -          |
 | `-e, --extension <type>` | Output format (webp, jpg, png, jfif) | webp       |
 | `-q, --quality <number>` | Quality (0-100)                      | 80         |
 | `-f, --fit <type>`       | Resize type (cover, contain, fill)   | cover      |
@@ -118,6 +127,16 @@ pnpm start -i ./photos -o ./webp-photos -e webp -q 85
 
 ```bash
 pnpm start -i ./photos -o ./thumbnails -w 150 -h 150 -f cover
+```
+
+### Scaling Images
+
+```bash
+# Reduce size by 50%
+pnpm start -i ./photos -o ./scaled -s 0.5
+
+# Double the size
+pnpm start -i ./photos -o ./upscaled -s 2.0
 ```
 
 ### Optimizing for Social Media

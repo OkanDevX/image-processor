@@ -4,7 +4,7 @@ import sharp from "sharp";
 
 import { getFiles } from "./get-files";
 
-type SharpOperation = (image: sharp.Sharp) => sharp.Sharp;
+type SharpOperation = (image: sharp.Sharp) => sharp.Sharp | Promise<sharp.Sharp>;
 
 interface ProcessImagesOptions {
   inputDir: string;
@@ -19,6 +19,18 @@ export class ImageProcessor {
   // Helper methods for creating Sharp operations
   static resize(options: sharp.ResizeOptions): SharpOperation {
     return (image) => image.resize(options);
+  }
+
+  static scale(factor: number): SharpOperation {
+    return async (image) => {
+      const metadata = await image.metadata();
+      const width = Math.round((metadata.width || 0) * factor);
+      const height = Math.round((metadata.height || 0) * factor);
+      return image.resize(width, height, { 
+        fit: 'fill',
+        withoutEnlargement: false 
+      });
+    };
   }
 
   static rotate(angle: number, options?: sharp.RotateOptions): SharpOperation {
@@ -105,10 +117,10 @@ export class ImageProcessor {
         await fs.ensureDir(path.dirname(outputPath));
 
         // Create pipeline and apply operations
-        const pipeline = operations.reduce(
-          (image, operation) => operation(image),
-          sharp(file)
-        );
+        let pipeline = sharp(file);
+        for (const operation of operations) {
+          pipeline = await Promise.resolve(operation(pipeline));
+        }
 
         await pipeline.toFile(outputPath);
         console.log(`✅ Processed: ${file} → ${outputPath}`);
